@@ -2,6 +2,7 @@ var http = require('http')
 var createHandler = require('github-webhook-handler')
 var handler = createHandler({ path: '/webhook',secret:'crack' })
 
+//listen
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
     res.statusCode = 404
@@ -9,6 +10,7 @@ http.createServer(function (req, res) {
   })
 }).listen(7778)
 
+//push handle
 function run_cmd(cmd, args, callback) {
   var spawn = require('child_process').spawn;
   var child = spawn(cmd, args);
@@ -23,6 +25,7 @@ handler.on('error', function (err) {
     console.error('Error:', err.message)
 })
 
+//push event
 handler.on('push', function (event) {
     console.log('Received a push event for %s to %s',
     event.payload.repository.name,
